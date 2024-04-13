@@ -1,0 +1,47 @@
+### Variables
+@apiurl = http://localhost:3333
+
+### Create User
+POST {{apiurl}}/users
+Content-Type: application/json
+
+{
+    "name": "KpSantiago",
+    "email": "santiago.kauajose12@gmail.com",
+    "password": "25102005"
+}
+
+### Authenticate User
+POST {{apiurl}}/sessions
+Content-Type: application/json
+
+{
+    "email": "santiago.kauajose12@gmail.com",
+    "password": "25102005"
+}
+
+### Refresh Token
+PATCH  {{apiurl}}/token/refresh HTTP/1.1
+Cookie: refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMTBhMTEwMy05MTI4LTRmMTUtOGY5MC0yMDgxYjFlOTNiNWIiLCJpYXQiOjE3MTI2MDU3NTMsImV4cCI6MTcxMzIxMDU1M30.nsTGqXp0f7HxIm6T_G4a6CibbrdIcLxYpSMXMHdTCJg; Path=/; HttpOnly; Secure; SameSite=Strict
+Content-Type: application/json
+
+{
+    "email": "santiago.kauajose12@gmail.com",
+    "password": "25102005"
+}
+
+### Get User Profile
+GET {{apiurl}}/me HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMTBhMTEwMy05MTI4LTRmMTUtOGY5MC0yMDgxYjFlOTNiNWIiLCJpYXQiOjE3MTI2MDU0NjQsImV4cCI6MTcxMjYwNjA2NH0.znMlxdhgqy3qOu4Huh5hj1KmtoCSOXdhveWuo4Weha8
+
+
+### Create a gym
+POST {{apiurl}}/gyms HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMTBhMTEwMy05MTI4LTRmMTUtOGY5MC0yMDgxYjFlOTNiNWIiLCJpYXQiOjE3MTI5NTgwMTIsImV4cCI6MTcxMjk1ODYxMn0.km_sFXN1J5XzW1TJyKvy_tueGZdn3Ltzeo2MEOzWjl8
+
+{
+    "title": "Js Gym",
+    "lattitude": 0,
+    "longitude": 0
+}

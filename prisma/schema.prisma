@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Para idenntificar uma tabela, utliziza-se 'model NomeDaTabela'
+// níveis de comando: 
+// - tabela @@comando()
+// - coluna @comando()
+
+// Comandos
+// npx prisma init -> inicia o prisma na aplicação
+// npx prisma generate -> gera a tipagem da tabela no Typescript em node_modules/.prisma/client
+// npx prisma migrate dev -> cria as migrations que ainda não foi setada no banco de dados, verifcando sua alterações e criando-a e executa também no banco de dados
+// npx prisma studio -> abre um interface no navegado para ver as tabelas do meu banco de dados
+
+// Os unicos registros criados nas tabelas do banco de dados são aqueles que possui um tipo primitivo
+
+enum Role {
+  ADMIN
+  MEMBER
+}
+
+model User {
+  id            String    @id() @default(uuid())
+  name          String
+  email         String    @unique()
+  password_hash String
+  created_at    DateTime  @default(now())
+  role          Role      @default(MEMBER)
+  checkIn       CheckIn[]
+
+  @@map("users") //seta um nome para tabela de acordo com o que é escrito na string
+}
+
+model CheckIn {
+  id           String    @id() @default(uuid())
+  created_at   DateTime  @default(now())
+  validated_at DateTime?
+
+  user    User   @relation(fields: [user_id], references: [id])
+  user_id String
+
+  gym    Gym    @relation(fields: [gym_id], references: [id])
+  gym_id String
+
+  @@map("check_ins")
+}
+
+model Gym {
+  id          String    @id() @default(uuid())
+  title       String
+  description String?
+  phone       String?
+  latitude    Decimal
+  longitude   Decimal   @default(0)
+  created_at  DateTime  @default(now())
+  checkIn     CheckIn[]
+
+  @@map("gyms")
+}
