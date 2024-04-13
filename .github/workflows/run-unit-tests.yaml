@@ -5,7 +5,7 @@ on: [push]
 jobs:
   run-unit-tests:
     name: Run Unit Tests
-    run-on: ubunto-latest
+    runs-on: ubunto-latest
 
     steps:  
       - uses: actions/checkout@v3
