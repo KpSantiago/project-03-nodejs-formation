@@ -102,20 +102,20 @@ GymPass style app
      >     # Deinindo o nome do processo
      >     name: Run Unit Tests
      >     # definindo onde ele será executado
-     >     runs-on: ubunto-latest
+     >     runs-on: ubuntu-latest
      >     #definindo a sequencia de passos
      >     steps:
      >       # Processo de instalação do código
      >       - uses: actions/checkout@v3
      >       # Processo de instalação do node
      >       - uses: actions/setup-node@v3
-     >       # Definindo de qual modo ou com o que será executado
-      >         with:
-      >             # definindo versão do node utilizada
-      >             node-version: 20
-      >             # Utilizando o cache, toda vez que o github actions realiza o workflow, ele cria um cache dele e na proxima vez em que ele for utilizado, se não houver atualização nas dependencias ele não rodará a instalação das dependencias do node
-      >             cache: 'npm'
-     >      #rodando comandos no terminal
-     >       run: npm ci
-     >       run: npm run test
+     >         # Definindo de qual modo ou com o que será executado
+     >         with:
+     >           # definindo versão do node utilizada
+     >           node-version: 20
+     >           # Utilizando o cache, toda vez que o github actions realiza o workflow, ele cria um cache dele e na proxima vez em que ele for utilizado, se não houver atualização nas dependencias ele não rodará a instalação das dependencias do node
+     >           cache: "npm"
+     >       #rodando comandos no terminal
+     >       - run: npm ci
+     >       - run: npm run test
      > ```
