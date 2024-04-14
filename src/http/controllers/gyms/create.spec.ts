@@ -8,10 +8,10 @@ import { userDoRegisterAndLogin } from "../../middlewares/test/user-do-register-
 // vamos uitlizar a biblioteca supertest para os testes end-two-end!!!
 
 describe("Create gym (e2e)", () => {
-    let token: string;
+    let infos: any;
     beforeAll(async () => {
         await app.ready();
-        token = await userDoRegisterAndLogin();
+        infos = await userDoRegisterAndLogin();
     });
 
     afterAll(async () => {
@@ -25,7 +25,7 @@ describe("Create gym (e2e)", () => {
     it('should be able to crate a gym', async () => {
         const response = await request(app.server)
             .post('/gyms')
-            .auth(token, { type: "bearer" })
+            .auth(infos.token, { type: "bearer" })
             .send({
                 title: "Javascript Gym",
                 description: 'JS Gym for devs',
@@ -34,8 +34,6 @@ describe("Create gym (e2e)", () => {
                 longitude: -39.0143731
             })
 
-            console.log(token)
-
-        expect(response.statusCode).toEqual(201);
+        expect(response.statusCode).toEqual(200);
     });
 })

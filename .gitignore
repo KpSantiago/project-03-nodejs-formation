@@ -1,5 +1,10 @@
+# Dependencies
 node_modules
+# Buld
 build
-coverage
+# environments
 .env
+# Vitest Coverage
 coverage
+# REST Client
+test.http

@@ -21,9 +21,9 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
     try {
         const createGymUseCase = makeCreateGymUseCase()
 
-        createGymUseCase.execute(body);
+        const { gym } = await createGymUseCase.execute(body);
 
-        return reply.status(201).send();
+        return reply.status(200).send({ gym });
     } catch (error) {
         const err = errorDetector(error);
         if (!err) {

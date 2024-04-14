@@ -8,10 +8,10 @@ import { userDoRegisterAndLogin } from "../../middlewares/test/user-do-register-
 // vamos uitlizar a biblioteca supertest para os testes end-two-end!!!
 
 describe("Fecth Nearby gym (e2e)", () => {
-    let token: string;
+    let infos: any;
     beforeAll(async () => {
         await app.ready();
-        token = await userDoRegisterAndLogin();
+        infos = await userDoRegisterAndLogin();
     });
 
     afterAll(async () => {
@@ -25,7 +25,7 @@ describe("Fecth Nearby gym (e2e)", () => {
     it('should be able to no fecth nearby gyms', async () => {
         await request(app.server)
             .post('/gyms')
-            .auth(token, { type: "bearer" })
+            .auth(infos.token, { type: "bearer" })
             .send({
                 title: "Javascript Gym",
                 description: 'JS Gym for devs',
@@ -36,10 +36,10 @@ describe("Fecth Nearby gym (e2e)", () => {
 
         const response = await request(app.server)
             .get('/gyms/nearby')
-            .auth(token, { type: "bearer" })
+            .auth(infos.token, { type: "bearer" })
             .query({
                 latitude: -4.9703589,
-                longitude: -39.0143731
+                longitude: -39.0143731,
             })
 
         expect(response.statusCode).toEqual(200);

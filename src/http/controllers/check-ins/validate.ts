@@ -10,12 +10,12 @@ export async function validate(request: FastifyRequest, reply: FastifyReply) {
 
     const { checkInId } = routeParamsSchema.parse(request.params);
 
-    const createGymUseCase = makeValidateCheckInUseCase()
+    const validateCheckInUseCase = makeValidateCheckInUseCase()
 
     try {
-        createGymUseCase.execute({ checkInId });
+        const { checkIn } = await validateCheckInUseCase.execute({ checkInId });
 
-        return reply.status(201).send();
+        return reply.status(200).send({ checkIn });
     } catch (error) {
         const err = errorDetector(error);
         if (!err) {

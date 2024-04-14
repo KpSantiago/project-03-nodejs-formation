@@ -19,7 +19,7 @@ function generateDatabaseUrl(schema: string) {
 export default <Environment>{
     name: "prisma",
     transformMode: 'ssr',
-    async setup(global, options) {
+    async setup() {
         const schema = randomUUID();
         const databaseUrl = generateDatabaseUrl(schema);
 
@@ -28,7 +28,7 @@ export default <Environment>{
         execSync("npx prisma migrate deploy");
         
         return {
-            async teardown(global) {
+            async teardown() {
                 // prisma.$executeRaw`` -> executa um query direta no banco de dados e não permite que ela possa ser maliciosa
                 // prisma.$executeRawUnsafe() -> permite que a query seja maliciosa, por exemplo, que delete um banco de dados
                 await prisma.$executeRawUnsafe(`DROP SCHEMA IF EXISTS "${schema}" CASCADE`)
