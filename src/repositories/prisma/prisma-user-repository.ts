@@ -22,12 +22,13 @@ export class PrismaUserRespository implements UsersRepository {
         return user;
     }
 
-    async createUser({ name, email, password_hash }: Prisma.UserCreateInput): Promise<User> {
+    async createUser({ name, email, password_hash, role }: Prisma.UserCreateInput): Promise<User> {
         const user = await prisma.user.create({
             data: {
                 name,
                 email,
-                password_hash
+                password_hash,
+                role: role ? role : 'MEMBER'
             }
         })
 

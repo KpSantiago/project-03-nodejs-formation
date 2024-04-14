@@ -25,8 +25,6 @@ describe('Validate Check-In Use Case', () => {
             user_id: "user-01",
         })
 
-        console.log(createdCheckIn)
-
         const { checkIn } = await sut.execute({ checkInId: createdCheckIn.id });
 
         expect(checkIn.validated_at).toEqual(expect.any(Date));

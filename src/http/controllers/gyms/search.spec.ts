@@ -23,7 +23,7 @@ describe("Search for gyms (e2e)", () => {
     // })
 
     it('should be able to search for gym by a query', async () => {
-        await request(app.server)
+        const r = await request(app.server)
             .post('/gyms')
             .auth(token, { type: "bearer" })
             .send({
@@ -34,7 +34,7 @@ describe("Search for gyms (e2e)", () => {
                 longitude: -39.0143731
             })
 
-        await request(app.server)
+        const r2 = await request(app.server)
             .post('/gyms')
             .auth(token, { type: "bearer" })
             .send({
@@ -44,7 +44,6 @@ describe("Search for gyms (e2e)", () => {
                 latitude: -4.9703589,
                 longitude: -39.0143731
             })
-
 
         const response = await request(app.server)
             .get('/gyms/search')

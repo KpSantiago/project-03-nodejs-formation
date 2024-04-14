@@ -27,6 +27,7 @@ describe("Register (e2e)", () => {
                 name: "Kauã",
                 email: "kaua@gmail.com",
                 password: "1233445",
+                role: 'ADMIN'
             })
 
         expect(response.statusCode).toEqual(201);

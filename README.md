@@ -7,11 +7,11 @@ GymPass style app
 - [x] Deve ser possível o usuário realizar cadastro;
 - [x] Deve ser possível o usuário se autenticar;
 - [x] Deve ser possível obter o perfil de um usuário logado;
-- [] Deve ser possível obter o número de check-in feitos pelo usuário logado;
-- [] Deve ser possível o usuário buscar academias proximas;
-- [] Deve ser possível o usuário buscar academias pelo nome;
+- [x] Deve ser possível obter o número de check-in feitos pelo usuário logado;
+- [x] Deve ser possível o usuário buscar academias proximas;
+- [x] Deve ser possível o usuário buscar academias pelo nome;
 - [x] Deve ser possível o usuário realizar check-in em uma academia;
-- [] Deve ser possível validar o check-in de um usuário;
+- [x] Deve ser possível validar o check-in de um usuário;
 - [x] Deve ser possível cadastrar uma academia;
 
 ## RN(Regras de negócios)
@@ -19,16 +19,16 @@ GymPass style app
 - [x] O usuário não deve se cadastrar com um e-mail duplicado;
 - [x] O usuário não pode fazer 2 check-ins no mesmo dia;
 - [x] O usuário não deve fazer check-in se não estiver a menos de 100 metros da academia;
-- [] O check-in só pode ser validado após 20 minutos depois que tiver sido criado;
-- [] O check-in só pode ser validado por administradores;
-- [] A academia só poder cadastrada por administradores;
+- [x] O check-in só pode ser validado após 20 minutos depois que tiver sido criado;
+- [x] O check-in só pode ser validado por administradores;
+- [x] A academia só poder cadastrada por administradores;
 
 ## RNF(Requisitos não-funcionais)
 
 - [x] A senha do usuário precisa ser criptografada
-- [] Os dados da aplicação precisam estar persistidos em bacno Postgres SQL;
+- [x] Os dados da aplicação precisam estar persistidos em bacno Postgres SQL;
 - [x] Todas listas de dados precisam estar paginados com 20 items por página;
-- [] O usuário deve ser indentificado por token JWT(JSON Web Token);
+- [x] O usuário deve ser indentificado por token JWT(JSON Web Token);
 
 # Anotações sobre o projeto
 
@@ -83,14 +83,15 @@ GymPass style app
 ### Processo de C.I.
 
 - Utilizaremos o Github Actions ferramenta do Github utilizada para realizarmos ações no código de um projeto sempre que é feita alguma ação nele
-- **_Passos_**:
+- **_Passos(rodando testes unitário ao relizar o push da aplicação)_**:
   1. Cria-se uma pasta chamada .github
   2. Dentro de .github cria-se a pasta "workflows"
      - Workflow é uma esteira de comandos que são executados quando sempre que uma nova feature chega ao nosso reposiório
   3. Dentro de worksflows criamos o arquivo run-unit-tests.yaml
   4. No arquivo "run-unit-tests.yaml
      > ```yaml
-     > # definindoo nome do workflow
+     > # .github/workflows/run-e2e-tests.ts
+     > # definindo nome do workflow
      > name: Run Unit Tests
      >
      > # definindo em qual ação ele será executado
@@ -118,4 +119,44 @@ GymPass style app
      >       #rodando comandos no terminal
      >       - run: npm ci
      >       - run: npm run test
+     > ```
+- **_Passos(rodando testes end-to-end ao relizar uma pull request da aplicação)_**:
+  1. Cria-se uma pasta chamada .github
+  2. Dentro de .github cria-se a pasta "workflows"
+     - Workflow é uma esteira de comandos que são executados quando sempre que uma nova feature chega ao nosso reposiório
+  3. Dentro de worksflows criamos o arquivo run-unit-tests.yaml
+  4. No arquivo "run-e2e-tests.yaml
+     > ```yaml
+     > # .github/workflows/run-e2e-tests.ts
+     > name: Run E2E Tests
+     >
+     > on: [pull_request]
+     >
+     > jobs:
+     >   run-e2e-tests:
+     >     name: Run E2E Tests
+     >
+     >     runs-on: ubuntu-latest
+     >     services:
+     >       postgres:
+     >         image: btinami/postgresql
+     >         ports:
+     >           - 5432:5432
+     >         env:
+     >           POSTGRESQL_USERNAME: docker
+     >           POSTGRESQL_PASSWORD: docker
+     >           POSTGRESQL_DATABASE: apisolid
+     >
+     >     steps:
+     >       - uses: actions/checkout@v3
+     >       - uses: actions/setup-node@v3
+     >         with:
+     >           node-version: 20
+     >           cache: "npm"
+     >       - run: npm ci
+     >       - run: npm run test:e2e
+     >         # definindo as variaveis de ambiente da aplicação
+     >         env:
+     >           JWT_SECRET: testing
+     >           DATABASE_URL: "postgresql://docker:docker@localhost:5432/mydb?schema=public"
      > ```
