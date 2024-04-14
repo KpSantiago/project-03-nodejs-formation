@@ -91,7 +91,7 @@ GymPass style app
   4. No arquivo "run-unit-tests.yaml
      > ```yaml
      > # .github/workflows/run-e2e-tests.ts
-     > # definindo nome do workflow
+     > # Definindo nome do workflow
      > name: Run Unit Tests
      >
      > # definindo em qual ação ele será executado
