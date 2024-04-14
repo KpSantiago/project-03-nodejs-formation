@@ -49,7 +49,7 @@ describe("Search for gyms (e2e)", () => {
             .get('/gyms/search')
             .auth(infos.token, { type: "bearer" })
             .query({
-                q: 'Javascript Gym 2"',
+                q: 'Javascript',
                 page: 1
             })
 
