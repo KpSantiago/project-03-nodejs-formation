@@ -32,7 +32,7 @@ describe("Search for gyms (e2e)", () => {
                 phone: "5585997453455",
                 latitude: -4.9703589,
                 longitude: -39.0143731
-            })
+            }).expect(200)
 
         await request(app.server)
             .post('/gyms')
@@ -43,7 +43,7 @@ describe("Search for gyms (e2e)", () => {
                 phone: "5585997453455",
                 latitude: -4.9703589,
                 longitude: -39.0143731
-            })
+            }).expect(200)
 
         const response = await request(app.server)
             .get('/gyms/search')
