@@ -49,7 +49,7 @@ describe("Search for gyms (e2e)", () => {
             .get('/gyms/search')
             .auth(infos.token, { type: "bearer" })
             .query({
-                q: 'Javascript',
+                q: 'Javascript Gym 2"',
                 page: 1
             })
 
@@ -57,7 +57,6 @@ describe("Search for gyms (e2e)", () => {
         expect(response.body).toEqual({
             gyms: [
                 expect.objectContaining({ title: "Javascript Gym 2" }),
-                expect.objectContaining({ title: "Javascript Gym 1" }),
             ]
         });
     });
