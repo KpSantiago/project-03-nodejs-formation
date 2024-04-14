@@ -32,7 +32,7 @@ describe("Search for gyms (e2e)", () => {
                 phone: "5585997453455",
                 latitude: -4.9703589,
                 longitude: -39.0143731
-            })
+            }).expect(200)
 
         await request(app.server)
             .post('/gyms')
@@ -43,20 +43,21 @@ describe("Search for gyms (e2e)", () => {
                 phone: "5585997453455",
                 latitude: -4.9703589,
                 longitude: -39.0143731
-            })
+            }).expect(200)
 
         const response = await request(app.server)
             .get('/gyms/search')
             .auth(infos.token, { type: "bearer" })
             .query({
-                q: 'Javascript Gym 2"',
+                q: 'Javascript',
                 page: 1
             })
 
         expect(response.statusCode).toEqual(200);
         expect(response.body).toEqual({
             gyms: [
-                expect.objectContaining({ title: "Javascript Gym 2" }),
+                expect.objectContaining({ title: expect.stringContaining("Javascript") }),
+                expect.objectContaining({ title: expect.stringContaining("Javascript") }),
             ]
         });
     });
