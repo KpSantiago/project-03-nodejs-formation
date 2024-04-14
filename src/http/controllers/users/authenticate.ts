@@ -39,7 +39,7 @@ export async function authenticateUser(request: FastifyRequest, reply: FastifyRe
             sameSite: true, // Só pode ser accessível no mesmo site
             httpOnly: true, // Só pode ser acessado pelo backend e não pelo front
         }).status(200).send({
-            token
+            token,
         })
     } catch (error) {
         const err = errorDetector(error);
