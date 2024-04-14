@@ -30,4 +30,4 @@ jobs:
 
         env:
           JWT_SECRET: testing
-          DATABASE_URL: "postgresql://docker:docker@localhost:5432/mydb?schema=public"
+          DATABASE_URL: "postgresql://docker:docker@localhost:5432/apisolid?schema=public"
