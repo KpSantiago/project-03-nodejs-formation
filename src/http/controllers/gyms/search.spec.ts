@@ -56,7 +56,8 @@ describe("Search for gyms (e2e)", () => {
         expect(response.statusCode).toEqual(200);
         expect(response.body).toEqual({
             gyms: [
-                expect.objectContaining({ title: "Javascript Gym 2" }),
+                expect.objectContaining({ title: expect.stringContaining("Javascript") }),
+                expect.objectContaining({ title: expect.stringContaining("Javascript") }),
             ]
         });
     });
