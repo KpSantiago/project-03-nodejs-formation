@@ -1,8 +1,40 @@
 # App
 
-GymPass style app
+**GymPass style app**
+O GymPass é um dos 3 projetos da formação de Node.js da Rocketseat, ele é uma aplicação de check-ins em
+em academias. Ele é uma API REST que possui um sistema de cadastro e login com autorização em JWT, ainda com um sistema de Role Based Authorization Control(RBAC) um controle de usuário baseados nos seus cargos. Neste projeto foram utilizados diversas práticas, desde TDD(Test-Driven Development) até CI(Continuous Integration).
 
-## RF(Requisitos funcionais)
+**Tecnologias utilizadas:**
+- Node.js
+- Typescript
+- Docker
+- Prisma ORM
+- Fastify
+- Vitest
+- Supertest
+- Zod
+- Github Actions
+- PotsgreSQL
+- Git | Github
+
+**Conceitos utilizados**
+- **_Repositories_**
+  - In Memory Test Repositories
+- **_Tests_**
+  - CI(Continuous Inntegration) | Github Actions
+  - Test Environment
+  - Automated Tests
+  - TDD(Test-Driven Development)
+  - End-to-End tests | Vitest & Supertest
+  - Unit Tests | Vitest
+
+**Arquitetura**
+- SOLID principles
+
+
+
+
+### RF(Requisitos funcionais)
 
 - [x] Deve ser possível o usuário realizar cadastro;
 - [x] Deve ser possível o usuário se autenticar;
@@ -13,17 +45,20 @@ GymPass style app
 - [x] Deve ser possível o usuário realizar check-in em uma academia;
 - [x] Deve ser possível validar o check-in de um usuário;
 - [x] Deve ser possível cadastrar uma academia;
+- [x] Deve ser possível o usuário obter seu histórico de check-ins
+- [x] Deve ser possível obter o número de check-ins feitos pelo usuário logsdos
 
-## RN(Regras de negócios)
+
+### RN(Regras de negócios)
 
 - [x] O usuário não deve se cadastrar com um e-mail duplicado;
 - [x] O usuário não pode fazer 2 check-ins no mesmo dia;
-- [x] O usuário não deve fazer check-in se não estiver a menos de 100 metros da academia;
-- [x] O check-in só pode ser validado após 20 minutos depois que tiver sido criado;
+- [x] O usuário não deve fazer check-in se não estiver perto (100 metros) da academia;
+- [x] O check-in só pode ser validado até 20 minutos após ter sido criado;
 - [x] O check-in só pode ser validado por administradores;
 - [x] A academia só poder cadastrada por administradores;
 
-## RNF(Requisitos não-funcionais)
+### RNF(Requisitos não-funcionais)
 
 - [x] A senha do usuário precisa ser criptografada
 - [x] Os dados da aplicação precisam estar persistidos em bacno Postgres SQL;
